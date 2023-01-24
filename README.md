@@ -1,10 +1,10 @@
 # Curseforge API
-[cfapi]: https://wow.curseforge.com/api
+[modrinth-api]: https://docs.modrinth.com/api-spec/
 [cfapi-docs]: https://wow.curseforge.com/api/docs
 [not-working-modrinth]: https://github.com/BetaPictoris/modrinth.py
 [cmpdl]: https://github.com/Advik-B/CMPDL
 
-This is a no-compromise CurseForge API wrapper for python. It is a re-write of [cursepy][not-working-modrinth] which is maintained but not actively developed.
+This is a no-compromise CurseForge API wrapper for python. It is a re-write of [Modrinth.py][not-working-modrinth] which (In my opinion) is trash
 This project is a complete re-write of the original project, with a focus on simplicity and ease of use.
 
 This project is still in development, and is not yet ready for production use.
@@ -21,42 +21,17 @@ This, of course can be disabled by setting the cache to False.
 ## Installation
 
 ```bash
-pip install curseforge
-```
-
-## Usage
-
-```python
-from curseforge import CurseClient
-
-client = CurseClient("API-KEY", cache=True)
-
-minecraft = client.game(432) # 432 is the ID of Minecraft
-
-# or we can list all the games
-games = client.games()
-
-for game in games:
-    print(game.name)
-
-# The search is up to the user to implement, this is just a wrapper
-
-# We can also get the latest files for a project
-
-JourneyMap = client.mod(2238) # 2238 is the ID of JourneyMap
-
-for file in JourneyMap.files:
-    print(file.name)
+pip install modrinth-api
 ```
 
 ## TODO
-- [x] Implement the export methods
-- [x] Implement the cache
-- [x] Implement the fetch method
-- [x] Deal with the download URL being a null value
+- [ ] Implement the export methods
+- [ ] Implement the cache
+- [ ] Implement the fetch method
+- [ ] Deal with the download URL being a null value
 - [ ] Implement the search method
 - [ ] Wrap the ENTIRE API
-- [x] Rename the classes so they have a `Curse` prefix
+- [ ] Rename the classes so they have a `Rinth` prefix
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
