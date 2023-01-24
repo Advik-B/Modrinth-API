@@ -1,4 +1,4 @@
-# Curseforge API
+# Modrinth API
 [modrinth-api]: https://docs.modrinth.com/api-spec/
 [cfapi-docs]: https://wow.curseforge.com/api/docs
 [not-working-modrinth]: https://github.com/BetaPictoris/modrinth.py
