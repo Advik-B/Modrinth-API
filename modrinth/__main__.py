@@ -1,6 +1,9 @@
 from .base import ModrinthClient
+from pprint import pprint
 
 client = ModrinthClient(cache=True)
-mods = client.fetch("mod", {"query": "Midnight"})
+mods = client.fetch("search", {"query": "Sodium"})
 
-print(mods)
+for mod in mods:
+    pprint(mod["title"])
+    print("."*80)
