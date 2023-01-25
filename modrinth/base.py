@@ -35,10 +35,12 @@ class ModrinthClient:
         if method == "get":
             return get(
                 URL,
+                verify=False,
             )
         elif method == "post":
             return post(
                 URL,
+                verify=False,
             )
         simplefilter("default", InsecureRequestWarning)
 
