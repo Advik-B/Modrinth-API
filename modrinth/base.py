@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from requests import get, post
 from diskcache import Cache
 from .classes import ModrinthProject
+from urllib3.connectionpool import InsecureRequestWarning
+from warnings import simplefilter
 
 BASE_URL = "http://api.modrinth.com"
 
@@ -28,7 +30,8 @@ class ModrinthClient:
         # "query=Midnight&author=Cryptic-Mushroom"
         queries = "&".join([f"{key}={value}" for key, value in queries.items()])
         URL = f"{BASE_URL}/{self.version}/{path}?{queries}"
-        print(URL)  # Debugging
+        # print(URL)  # Debugging
+        simplefilter("ignore", InsecureRequestWarning)
         if method == "get":
             return get(
                 URL,
@@ -37,6 +40,7 @@ class ModrinthClient:
             return post(
                 URL,
             )
+        simplefilter("default", InsecureRequestWarning)
 
     def fetch(self, url: str, queries: dict = None, method: str = "GET") -> dict:
         if queries is None:
