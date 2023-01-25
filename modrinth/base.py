@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from requests import get, post
 from diskcache import Cache
+from .classes import ModrinthProject
 
 BASE_URL = "http://api.modrinth.com"
 
@@ -44,11 +45,14 @@ class ModrinthClient:
         if self.cache:
             temp = self.cache_obj.get(url)
         if self.cache and temp is not None:
-            return temp["hits"]
+            return temp
 
         response = self.fetch_raw(url, queries, method)
         if response.status_code == 200:
             data = response.json()
             if self.cache:
                 self.cache_obj.set(url, data)
-            return data["hits"]
+            return data
+
+    def get_project(self, project_id: str) -> ModrinthProject:
+        return ModrinthProject.from_dict(self.fetch(f"project/{project_id}"))
