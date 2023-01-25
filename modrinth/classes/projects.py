@@ -49,3 +49,42 @@ class ModrinthProject:
     license: ModrinthLicense
     versions: list[str]
     gallery: list[ModrinthImage]
+
+    @staticmethod
+    def from_dict(data: dict) -> "ModrinthProject":
+        return ModrinthProject(
+            slug=data["slug"],
+            title=data["title"],
+            description=data["description"],
+            categories=data["categories"],
+            client_side=data["client_side"],
+            server_side=data["server_side"],
+            additional_categories=[
+                ModrinthCategory.from_dict(category)
+                for category in data["additional_categories"]
+            ],
+            issues_url=data["issues_url"],
+            source_url=data["source_url"],
+            wiki_url=data["wiki_url"],
+            discord_url=data["discord_url"],
+            donation_urls=[
+                ModrinthDonationURL.from_dict(url) for url in data["donation_urls"]
+            ],
+            project_type=data["project_type"],
+            downloads=data["downloads"],
+            icon_url=data["icon_url"],
+            id=data["id"],
+            team=data["team"],
+            body_url=data["body_url"],
+            moderator_message=data["moderator_message"],
+            published=data["published"],
+            updated=data["updated"],
+            approved=data["approved"],
+            followers=data["followers"],
+            status=data["status"],
+            license=ModrinthLicense.from_dict(data["license"]),
+            versions=data["versions"],
+            gallery=[ModrinthImage.from_dict(image) for image in data["gallery"]],
+            body=data["body"],
+        )
+
