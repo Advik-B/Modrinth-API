@@ -9,7 +9,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 with codecs.open(os.path.join(here, "requirements.txt"), encoding="utf-8") as fh:
     requirements = fh.read().splitlines()
-VERSION = '0.0.1 '
+VERSION = "0.0.1 "
 DESCRIPTION = "A no-compromises wrapper for the Modrinth API"
 
 # Setting up
