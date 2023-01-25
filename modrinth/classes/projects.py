@@ -87,4 +87,3 @@ class ModrinthProject:
             gallery=[ModrinthImage.from_dict(image) for image in data["gallery"]],
             body=data["body"],
         )
-
