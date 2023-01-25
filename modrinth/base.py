@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 from requests import get, post
-from warnings import simplefilter
-from urllib3.connectionpool import InsecureRequestWarning
 from diskcache import Cache
 
 BASE_URL = "http://api.modrinth.com"
@@ -16,7 +14,7 @@ class ModrinthClient:
         if self.cache:
             self.cache_obj = Cache(self.cache_dir)
 
-    def fetch_raw(self, url: str, queries: dict = None, method: str = "GET"):
+    def fetch_raw(self, path: str, queries: dict = None, method: str = "GET"):
         if queries is None:
             queries = {}
 
@@ -26,29 +24,27 @@ class ModrinthClient:
         # For multiple queries, the API expects them to be separated by "&".
         # Example: {"query": "Midnight", "author": "Cryptic-Mushroom"} -> "query=Midnight&author=Cryptic-Mushroom"
         queries = "&".join([f"{key}={value}" for key, value in queries.items()])
-        simplefilter("ignore", InsecureRequestWarning)
+        URL = f"{BASE_URL}/{self.version}/{path}?{queries}"
+        print(URL) # Debugging
         if method == "get":
             return get(
-                f"{BASE_URL}/{self.version}/{url}?{queries}",
-                verify=False
+                URL,
             )
         elif method == "post":
             return post(
-                f"{BASE_URL}/{self.version}/{url}?{queries}",
-                verify=False
+                URL,
             )
-        simplefilter("default", InsecureRequestWarning)
 
-    def fetch(self, url: str, params: dict = None, method: str = "GET") -> dict:
-        if params is None:
-            params = {}
+    def fetch(self, url: str, queries: dict = None, method: str = "GET") -> dict:
+        if queries is None:
+            queries = {}
 
         if self.cache:
             temp = self.cache_obj.get(url)
         if self.cache and temp is not None:
             return temp["hits"]
 
-        response = self.fetch_raw(url, params, method)
+        response = self.fetch_raw(url, queries, method)
         if response.status_code == 200:
             data = response.json()
             if self.cache:
