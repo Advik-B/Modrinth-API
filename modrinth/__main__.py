@@ -6,4 +6,4 @@ mods = client.fetch("search", {"query": "Sodium"})
 
 for mod in mods:
     pprint(mod["title"])
-    print("."*80)
+    print("." * 80)
