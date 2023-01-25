@@ -4,6 +4,7 @@ from diskcache import Cache
 
 BASE_URL = "http://api.modrinth.com"
 
+
 @dataclass
 class ModrinthClient:
     version: str = "v2"
@@ -22,10 +23,11 @@ class ModrinthClient:
         # The queries are passed as a dictionary, but the API expects them as a string.
         # Example: {"query": "Midnight"} -> "query=Midnight"
         # For multiple queries, the API expects them to be separated by "&".
-        # Example: {"query": "Midnight", "author": "Cryptic-Mushroom"} -> "query=Midnight&author=Cryptic-Mushroom"
+        # Example: {"query": "Midnight", "author": "Cryptic-Mushroom"} ->
+        # "query=Midnight&author=Cryptic-Mushroom"
         queries = "&".join([f"{key}={value}" for key, value in queries.items()])
         URL = f"{BASE_URL}/{self.version}/{path}?{queries}"
-        print(URL) # Debugging
+        print(URL)  # Debugging
         if method == "get":
             return get(
                 URL,
@@ -50,4 +52,3 @@ class ModrinthClient:
             if self.cache:
                 self.cache_obj.set(url, data)
             return data["hits"]
-
