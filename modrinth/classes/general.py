@@ -17,9 +17,28 @@ class ModrinthCategory:
     header: str
     icon: ModrinthSVG
 
+
 @dataclass
 class ModrinthDonationURL:
     id: str
     platform: str
     url: str
 
+
+ModrinthStats = Literal["approved", "rejected", "pending", "unreviewed"]
+
+
+@dataclass
+class ModrinthLicense:
+    id: str
+    name: str
+    url: str
+
+
+@dataclass
+class ModrinthImage:
+    url: str
+    featured: bool
+    title: str
+    description: str
+    created: str
