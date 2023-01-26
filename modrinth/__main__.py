@@ -5,5 +5,5 @@ client = ModrinthClient(cache=True)
 
 print("Fetching project...")
 project = client.get_project("iris")
-for img in project.gallery:
-    print(img.url)
+for img in project.versions:
+    print(img)
